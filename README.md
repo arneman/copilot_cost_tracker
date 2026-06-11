@@ -56,4 +56,5 @@ In the dashboard:
 ## Notes
 
 - `project_path` and `project_name` are inferred from request text and may be `None` if missing in logs.
+- **Cost calculation**: Uses `copilotUsageNanoAiu` from VS Code logs (pre-calculated by Copilot API). This field already accounts for token pricing differences, including cached token discounts. Token counts (`inputTokens`, `outputTokens`, `cachedTokens`) are extracted for visibility but do not drive cost calculations.
 - Costs are estimated from `copilotUsageNanoAiu` using `$0.01` per credit.
