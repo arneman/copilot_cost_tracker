@@ -19,6 +19,15 @@ Small Python project to extract GitHub Copilot Chat usage from VS Code debug log
 uv sync
 ```
 
+## VS Code Settings Prerequisite
+
+To generate the Copilot debug logs used by this tool, add the following to your VS Code settings.json:
+
+```json
+"github.copilot.chat.agentDebugLog.enabled": true,
+"github.copilot.chat.agentDebugLog.fileLogging.enabled": true
+```
+
 ## Extract Usage CSV
 
 ```bash
