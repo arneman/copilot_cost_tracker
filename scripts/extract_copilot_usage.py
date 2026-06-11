@@ -68,18 +68,22 @@ def extract_project_from_attrs(attrs: dict) -> tuple[str, str]:
         return "None", "None"
 
     project_path = match.group(1)
-    
+
     # Filter out unreliable entries
     if not project_path or project_path.endswith(("...", "..", "/")):
         return "None", "None"
-    
+
     project_name = Path(project_path).name or "None"
-    
+
     # Filter out home directory or username-only entries
     home_dir = str(Path.home())
-    if project_path == home_dir or project_name == Path.home().name or project_name in (".", ".."):
+    if (
+        project_path == home_dir
+        or project_name == Path.home().name
+        or project_name in (".", "..")
+    ):
         return "None", "None"
-    
+
     return project_path, project_name
 
 
