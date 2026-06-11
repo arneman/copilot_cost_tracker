@@ -1,0 +1,8 @@
+# Python caches and local env
+__pycache__/
+.mypy_cache/
+.venv/
+
+# Generated runtime artifacts
+output/copilot_usage_events.csv
+output/dashboard_state.json
