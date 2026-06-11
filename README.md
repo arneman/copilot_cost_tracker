@@ -40,6 +40,10 @@ In the dashboard:
 - Use **Refresh extraction now** to regenerate the CSV.
 - Download the current CSV via **Download usage CSV**.
 
+## Screenshot
+
+![Dashboard screenshot](image.png)
+
 ## Notes
 
 - `project_path` and `project_name` are inferred from request text and may be `None` if missing in logs.

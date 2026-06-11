@@ -16,7 +16,15 @@ DEFAULT_CSV = Path("output/copilot_usage_events.csv")
 STATE_FILE = Path("output/dashboard_state.json")
 LOCAL_TZ = datetime.now().astimezone().tzinfo
 LOCAL_TZ_LABEL = str(LOCAL_TZ) if LOCAL_TZ is not None else "local"
-TIME_PRESET_OPTIONS = ["All", "Last 24 hours", "Last 7 days", "Last 30 days", "Custom"]
+TIME_PRESET_OPTIONS = [
+    "All",
+    "Last 1 hour",
+    "Last 6 hours",
+    "Last 24 hours",
+    "Last 7 days",
+    "Last 30 days",
+    "Custom",
+]
 INTERVAL_TO_PANDAS_FREQ = {
     "5 minutes": "5min",
     "15 minutes": "15min",
@@ -157,6 +165,10 @@ def load_usage_data(csv_path: str) -> pd.DataFrame:
 def default_start_for_preset(
     preset: str, max_ts: pd.Timestamp, min_ts: pd.Timestamp
 ) -> pd.Timestamp:
+    if preset == "Last 1 hour":
+        return max(max_ts - timedelta(hours=1), min_ts)
+    if preset == "Last 6 hours":
+        return max(max_ts - timedelta(hours=6), min_ts)
     if preset == "Last 24 hours":
         return max(max_ts - timedelta(hours=24), min_ts)
     if preset == "Last 7 days":
