@@ -199,6 +199,7 @@ def aggregate_time_series(df: pd.DataFrame, freq: str) -> pd.DataFrame:
         )
         .reset_index()
     )
+    ts["new_input_tokens"] = (ts["input_tokens"] - ts["cached_tokens"]).clip(lower=0)
     return ts
 
 
@@ -384,7 +385,7 @@ def main() -> None:
     fig_tok = px.line(
         time_series,
         x="ts_local",
-        y=["input_tokens", "output_tokens", "cached_tokens"],
+        y=["new_input_tokens", "output_tokens", "cached_tokens"],
         labels={
             "value": "Tokens",
             "ts_local": f"Time ({LOCAL_TZ_LABEL})",
