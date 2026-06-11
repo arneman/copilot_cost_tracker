@@ -20,6 +20,7 @@ TIME_PRESET_OPTIONS = [
     "All",
     "Last 1 hour",
     "Last 6 hours",
+    "Last 12 hours",
     "Last 24 hours",
     "Last 7 days",
     "Last 30 days",
@@ -169,6 +170,8 @@ def default_start_for_preset(
         return max(max_ts - timedelta(hours=1), min_ts)
     if preset == "Last 6 hours":
         return max(max_ts - timedelta(hours=6), min_ts)
+    if preset == "Last 12 hours":
+        return max(max_ts - timedelta(hours=12), min_ts)
     if preset == "Last 24 hours":
         return max(max_ts - timedelta(hours=24), min_ts)
     if preset == "Last 7 days":
