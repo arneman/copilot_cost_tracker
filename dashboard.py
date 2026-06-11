@@ -372,6 +372,29 @@ def main() -> None:
     fig_cost.update_traces(hovertemplate="%{x}<br>Cost: $%{y:,.4f}<extra></extra>")
     st.plotly_chart(fig_cost, use_container_width=True)
 
+    st.subheader("Cost by Model")
+    cost_by_model = (
+        filtered.groupby("model")["usd_estimate_1c_per_credit"]
+        .sum()
+        .reset_index()
+        .rename(
+            columns={
+                "model": "Model",
+                "usd_estimate_1c_per_credit": "Cost (USD)",
+            }
+        )
+    )
+    fig_pie = px.pie(
+        cost_by_model,
+        names="Model",
+        values="Cost (USD)",
+        labels={"Cost (USD)": "Cost (USD)"},
+    )
+    fig_pie.update_traces(
+        hovertemplate="<b>%{label}</b><br>Cost: $%{value:,.4f}<br>%{percent}<extra></extra>"
+    )
+    st.plotly_chart(fig_pie, use_container_width=True)
+
     st.subheader("Requests Over Time")
     fig_req = px.bar(
         time_series,
